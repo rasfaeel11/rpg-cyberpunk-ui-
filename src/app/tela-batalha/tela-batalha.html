@@ -1,1 +1,23 @@
-<p>tela-batalha works!</p>
+<div class="arena">
+  <div class="card-personagem">
+    <h2>{{ jogador.nome }}</h2>
+    <p>HP: {{ jogador.hp }}</p>
+    <p>EP: {{ jogador.ep }}</p>
+    <p>Stims: {{ jogador.stims }}</p>
+  </div>
+
+  <div class="card-personagem">
+    <h2>{{ inimigo.nome }}</h2>
+    <p>HP: {{ inimigo.hp }}</p>
+  </div>
+</div>
+
+<div class="acoes">
+  <button>Ataque Físico</button>
+  <button>Ataque Cibernético</button>
+  <button>Usar Stim</button>
+</div>
+
+<div class="mensagem-turno">
+  <p>{{ mensagem }}</p>
+</div>
