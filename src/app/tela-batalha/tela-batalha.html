@@ -1,23 +1,25 @@
-<div class="arena">
-  <div class="card-personagem">
-    <h2>{{ jogador.nome }}</h2>
-    <p>HP: {{ jogador.hp }}</p>
-    <p>EP: {{ jogador.ep }}</p>
-    <p>Stims: {{ jogador.stims }}</p>
-  </div>
+@if (gameState) {
+    <div class="arena">
+      <div class="card-personagem">
+        <h2>{{ gameState.nomeJogador }}</h2>
+        <p>HP: {{ gameState.hpJogador }}</p>
+        <p>EP: {{ gameState.epJogador }}</p>
+        <p>Stims: {{ gameState.stimsJogador }}</p>
+      </div>
 
-  <div class="card-personagem">
-    <h2>{{ inimigo.nome }}</h2>
-    <p>HP: {{ inimigo.hp }}</p>
-  </div>
-</div>
+      <div class="card-personagem">
+        <h2>{{ gameState.nomeInimigo }}</h2>
+        <p>HP: {{ gameState.hpInimigo }}</p>
+      </div>
+    </div>
 
-<div class="acoes">
-  <button (click)="ataqueFisico()">Ataque Físico</button>
-  <button (click)="ataqueCibernetico()">Ataque Cibernético</button>
-  <button (click)="usarStim()">Usar Stim</button>
-</div>
+    <div class="acoes">
+      <button (click)="ataqueFisico()">Ataque Físico</button>
+      <button (click)="ataqueCibernetico()">Ataque Cibernético</button>
+      <button (click)="usarStim()">Usar Stim</button>
+    </div>
 
-<div class="mensagem-turno">
-  <p>{{ mensagem }}</p>
-</div>
+    <div class="mensagem-turno">
+      <p>{{ gameState.mensagem }}</p>
+    </div>
+}

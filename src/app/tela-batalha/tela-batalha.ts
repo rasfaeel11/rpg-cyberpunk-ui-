@@ -1,49 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GameApi, GameState } from '../services/game-api';
 
 @Component({
   selector: 'app-tela-batalha',
-  imports: [],
-  templateUrl: './tela-batalha.html',
-  styleUrl: './tela-batalha.css'
-})
-export class TelaBatalha {
-// --- Nossos Dados Falsos (Mock) ---
-  jogador = {
-    nome: 'V',
-    hp: 100,
-    ep: 20,
-    stims: 2
-  };
 
-  inimigo = {
-    nome: 'Drone de Segurança',
-    hp: 50
-  };
+  templateUrl: './tela-batalha.html',
+  styleUrls: ['./tela-batalha.css']
+})
+export class TelaBatalhaComponent implements OnInit { 
+  gameState?: GameState; 
+
+  constructor(private gameApi: GameApi) { }
+
+  ngOnInit(): void {
+    const dadosParaEnviar = {
+      nomeJogador: 'V',
+      escolhaClasse: 3,
+      dificuldade: 2
+    };
+
+    this.gameApi.iniciarJogo(dadosParaEnviar).subscribe(resposta => {
+      console.log('Dados recebidos da API!', resposta);
+      this.gameState = resposta;
+    });
+  }
+
+
 
   public ataqueFisico(): void {
     console.log('Ataque Físico Funcionando');
-    this.inimigo.hp -= 10;
+    if (this.gameState) {
+      this.gameState.hpInimigo -= 10;
+    }
   }
 
   public ataqueCibernetico(): void {
     console.log('Ataque Cibernético Funcionando');
-    this.inimigo.hp -= 15;
-    this.jogador.ep -= 5;
+    if (this.gameState) {
+      this.gameState.hpInimigo -= 15;
+      this.gameState.epJogador -= 5;
+    }
   }
 
   public usarStim(): void {
-    if (this.jogador.stims <= 0){
-      return;
+    if (this.gameState && this.gameState.stimsJogador > 0) {
+      console.log('Usar Stim Funcionando');
+      this.gameState.hpJogador += 20;
+      this.gameState.stimsJogador -= 1;
+    } else {
+      console.log('Você não tem mais Stims!');
     }
-    console.log('Usar Stim Funcionando');
-    this.jogador.hp += 20;
-    this.jogador.stims -= 1;
-
   }
 
-  mensagem = 'O que você vai fazer?';
-  // --- Fim dos Dados Falsos ---
-
-  constructor() { }
-
-}
+} 

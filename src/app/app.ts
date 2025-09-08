@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { TelaBatalha } from "./tela-batalha/tela-batalha";
+import {  TelaBatalhaComponent } from "./tela-batalha/tela-batalha";
 
 @Component({
   selector: 'app-root',
-  imports: [TelaBatalha],
+  imports: [TelaBatalhaComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
